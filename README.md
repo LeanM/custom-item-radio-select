@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save item-radio-select
+npm install --save custom-item-radio-select
 ```
 
 ## Demo
@@ -32,61 +32,33 @@ data = [
 ]
 ```
 
-For this example, we create a basic component called "ActualItem" , which will display the information of each item in a simple way.
+### Using ItemRadioSelect component
 
-```tsx
-import React from 'react'
-import { ItemData } from './App'
+For this example, we want to represent these data items as simple cards, so we create a basic component called "Card", which will display the information of each item in a simple way.
 
-export interface ActualItemProps {
-  itemData: ItemData
-  actualSelectedItem: any
-}
-
-export default function ActualItem(props: ActualItemProps) {
-  const { itemData, actualSelectedItem } = props
-
-  return (
-    <div
-      style={{
-        width: '4rem',
-        textAlign: 'center',
-        backgroundColor: actualSelectedItem.id === itemData.id ? 'red' : 'grey', // Behaviour when the item is the one selected or not
-        height: '4rem',
-        borderRadius: '20px'
-      }}
-    >
-      {itemData.name}
-    </div>
-  )
-}
-```
-
-### Using component ActualItem in radio selection component
-
-Now we can see that the retrieved array of items and the 'ActualItem' component are sent as properties to the 'ItemRadioSelect' component.
+The retrieved array of items and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
 
 It can also be observed how styles can be specified within it, as well as the functionality that is executed when one of the items is selected.
 
 ```tsx
 import ItemRadioSelect from 'item-radio-select'
 import React, { useState } from 'react'
-import ActualItem from './ActualItem'
+import Card from './Card'
 
-export interface ItemData {
+export interface CardData {
   id: number
   name: string
 }
 
 function App() {
   // Fetched data
-  const [data, setData] = useState<ItemData[]>([
+  const [data, setData] = useState<CardData[]>([
     { id: 1, name: 'Item1' },
     { id: 2, name: 'Item2' },
     { id: 3, name: 'Item3' }
   ])
 
-  // Styles for ItemRadioSelect component
+  // Styles for ItemRadioSelect component:
   // width: Specify the width of the container of the radio select
   // height: Specify the height of the container of the radio select
   // gap: Specify the gap between items of the radio select
@@ -109,9 +81,45 @@ function App() {
         style={itemRadioSelectStyles}
         type='horizontal' // type can be "horizontal" (flexDirection row) or "vertical" (flexDirection column)
         itemsData={data} // Specify the data to render the items
-        onSelectedItem={(item: ItemData) => {}} // Define what executes when an item is selected
-        ItemComponent={ActualItem} // Specify the Component that will render for each data item
+        onSelectedItem={(item: CardData) => {}} // Define what executes when an item is selected
+        ItemComponent={Card} // Specify the Component that will render for each data item
+        //  In this case, the Card component created below
       ></ItemRadioSelect>
+    </div>
+  )
+}
+```
+
+Every card will receive the data of the item to render and the information of
+the actual item selected in the ItemRadioSelect component, so the Card can
+make whatever you want when is or is not selected.
+
+```tsx
+import React from 'react'
+import { CardData } from './App'
+
+export interface CardProps {
+  itemData: CardData
+  actualSelectedItem: any
+}
+
+export default function Card(props: CardProps) {
+  // The component will receive in props the information of what item is selected
+  // on the radio select component
+  const { itemData, actualSelectedItem } = props
+
+  return (
+    <div
+      style={{
+        width: '4rem',
+        textAlign: 'center',
+        backgroundColor: actualSelectedItem.id === itemData.id ? 'red' : 'grey',
+        // Behaviour when the item is the one selected or not
+        height: '4rem',
+        borderRadius: '20px'
+      }}
+    >
+      {itemData.name}
     </div>
   )
 }
