@@ -16,7 +16,7 @@ npm install --save custom-item-radio-select
 
 ## Usage
 
-### Example Item component to render
+### Concept
 
 To obtain a customizable radio selection of any type, this component requires information that will be represented and how this information will be displayed as a radio button. Therefore, the ItemRadioSelect component must be provided with a component that represents the existing information according to the developer's preferences.
 
@@ -32,7 +32,7 @@ data = [
 ]
 ```
 
-### Using ItemRadioSelect component
+### ItemRadioSelect Component
 
 For this example, we want to represent these products as simple cards that will function as radio buttons, so we create a basic component called "Card", which will display the information of each item in a simple, customized way.
 
@@ -93,6 +93,8 @@ function App() {
   )
 }
 ```
+
+### Example Card Component
 
 The component designed to function as a radio button will receive the data of the item (in this example, a product) to render it, along with a boolean prop that determines whether the component represents the current selection or not.
 
