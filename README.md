@@ -1,4 +1,4 @@
-# item-radio-select
+# custom-item-radio-select
 
 > Customizable radio selection of items defined by user
 
