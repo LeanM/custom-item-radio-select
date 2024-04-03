@@ -1,8 +1,13 @@
 import React, { ComponentType, useEffect, useState } from 'react'
 import Item from './Item'
 
+export interface ItemComponentProps {
+  itemData: any
+  isSelected: boolean
+}
+
 export interface ItemRadioSelectProps {
-  ItemComponent: ComponentType<any>
+  ItemComponent: ComponentType<ItemComponentProps>
   itemsData: any[]
   onSelectedItem: (itemID: any) => void
   style?: ItemRadioSelectStyles
@@ -26,7 +31,7 @@ const styles = {
 
 export default function ItemRadioSelect(props: ItemRadioSelectProps) {
   const { itemsData, ItemComponent, onSelectedItem, style, type } = props
-  const [selectedItem, setSelectedItem] = useState<any>({})
+  const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1)
   const [componentStyles, setComponentStyles] = useState<any>({})
 
   useEffect(() => {
@@ -35,12 +40,9 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
     } else setComponentStyles({ ...styles, ...style })
   }, [style])
 
-  useEffect(() => {
+  const handleSelected = (selectedItem: any, selectedIndex: number) => {
     onSelectedItem(selectedItem)
-  }, [selectedItem])
-
-  const handleSelected = (selectedItem: any) => {
-    setSelectedItem(selectedItem)
+    setSelectedItemIndex(selectedIndex)
   }
 
   return (
@@ -49,13 +51,14 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
         return (
           <Item
             key={index}
-            item={item}
-            onSelected={(selectedItem: any) => {
-              handleSelected(selectedItem)
+            itemIndex={index}
+            itemData={item}
+            onSelected={(selectedItem: any, selectedIndex: number) => {
+              handleSelected(selectedItem, selectedIndex)
             }}
-          >
-            <ItemComponent itemData={item} actualSelectedItem={selectedItem} />
-          </Item>
+            actualSelectedItemIndex={selectedItemIndex}
+            ItemComponent={ItemComponent}
+          />
         )
       })}
     </div>

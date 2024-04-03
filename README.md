@@ -18,11 +18,11 @@ npm install --save custom-item-radio-select
 
 ### Example Item component to render
 
-To obtain a customizable radio selection of any type, this component requires the information that will be represented and how this information will be displayed. For this, the ItemRadioSelect component must be injected with a component that represents the existing information according to the developer's preferences.
+To obtain a customizable radio selection of any type, this component requires information that will be represented and how this information will be displayed as a radio button. Therefore, the ItemRadioSelect component must be provided with a component that represents the existing information according to the developer's preferences.
 
-So this component requires an array of data (the items of any type) and the component that will be rendered as a radio button for every of those items.
+Thus, this component requires an array of data (the items of any type) and the component that will be rendered as a radio button for each of those items.
 
-Let's consider the example where we fetch information about Products that have an ID, a name and a value. In this case, we have an array with the following items:
+Let's consider the example where we fetch information about products that have an ID, a name, and a value. In this case, we have an array with the following items:
 
 ```tsx
 data = [
@@ -34,9 +34,9 @@ data = [
 
 ### Using ItemRadioSelect component
 
-For this example, we want to represent these produccts as simple cards, so we create a basic component called "Card", which will display the information of each item in a simple customized way.
+For this example, we want to represent these products as simple cards that will function as radio buttons, so we create a basic component called "Card", which will display the information of each item in a simple, customized way.
 
-The retrieved array of Products and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
+The retrieved array of products and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
 
 It can also be observed how styles can be specified within it, as well as the functionality that is executed when one of the items is selected.
 
@@ -81,9 +81,12 @@ function App() {
       <ItemRadioSelect
         style={itemRadioSelectStyles}
         type='horizontal' // type can be "horizontal" (flexDirection row) or "vertical" (flexDirection column)
-        itemsData={data} // Specify the data to render the items
-        onSelectedItem={(item: Product) => {}} // Define what executes when an item is selected
-        ItemComponent={Card} // Specify the Component that will render for each data item
+        itemsData={data} // Specification of the data to render the items
+        onSelectedItem={(item: Product) => {
+          console.log(item)
+        }} // Definition of what to execute upon the selection of an item
+        ItemComponent={Card}
+        // Specification of the component that will render each data item and function as a radio button
         //  In this case, the Card component created below
       />
     </div>
@@ -91,33 +94,31 @@ function App() {
 }
 ```
 
-Every card will receive the data of the item (in this example, a product) to render
-and updates of the actual item selected in the ItemRadioSelect component.
+The component designed to function as a radio button will receive the data of the item (in this example, a product) to render it, along with a boolean prop that determines whether the component represents the current selection or not.
 
 ```tsx
 import React from 'react'
 import { CardData } from './App'
 
-// Props need to respect the 'itemData' and 'actualSelectedItem' key names.
+// Necessary props
 export interface CardProps {
-  itemData: Product
-  actualSelectedItem: Product
+  itemData: Product // The data of the item to display (in this case a Product)
+  isSelected: boolean // If this item (in this case, the Card) is the current selection on the ItemRadioSelect component or not
 }
 
 export default function Card(props: CardProps) {
-  // The component will receive in props the information of what item
-  // is selected on the radio select component
-  const { itemData, actualSelectedItem } = props
+  const { itemData, isSelected } = props
 
   const [background, setBackground] = useState('grey')
 
   useEffect(() => {
-    // Behaviour that checks if this item is the one selected or not and do something
-    // (in this particular case the check is by the id's)
-    if (actualSelectedItem.id === itemData.id) {
+    // Customizable behavior for when the item is selected or not
+    if (isSelected) {
       setBackground('red')
-    } else setBackground('grey')
-  }, [actualSelectedItem])
+    } else {
+      setBackground('grey')
+    }
+  }, [isSelected])
 
   return (
     <div
@@ -136,6 +137,12 @@ export default function Card(props: CardProps) {
   )
 }
 ```
+
+## Finally
+
+Given the operation of the component in this example, this shows that it can be utilized for any dataset (as in this case, the products), and with any component representing them (as in this case, the Card component) using 'itemData' and 'isSelected' props provided by the ItemRadioSelect component.
+
+With that, allowing customization of how the different information is represented, and what happens upon selecting/deselecting an item.
 
 ## License
 

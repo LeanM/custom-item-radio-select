@@ -3,19 +3,19 @@ import { Product } from './App'
 
 export interface CardProps {
   itemData: Product
-  actualSelectedItem: Product
+  isSelected: boolean
 }
 
 export default function Card(props: CardProps) {
-  const { itemData, actualSelectedItem } = props
+  const { itemData, isSelected } = props
 
   const [background, setBackground] = useState('grey')
 
   useEffect(() => {
-    if (actualSelectedItem.id === itemData.id) {
+    if (isSelected) {
       setBackground('red')
     } else setBackground('grey')
-  }, [actualSelectedItem])
+  }, [isSelected])
 
   return (
     <div

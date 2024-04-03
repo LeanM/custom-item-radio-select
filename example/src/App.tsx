@@ -34,7 +34,9 @@ function App() {
         style={itemRadioSelectStyles}
         type='vertical'
         itemsData={data}
-        onSelectedItem={(item: Product) => {}}
+        onSelectedItem={(item: Product) => {
+          console.log(item)
+        }}
         ItemComponent={Card}
       ></ItemRadioSelect>
     </div>

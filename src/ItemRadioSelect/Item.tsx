@@ -1,18 +1,27 @@
-import React from 'react'
+import React, { ComponentType } from 'react'
+import { ItemComponentProps } from './ItemRadioSelect'
 
 export interface ItemProps {
-  onSelected: (selectedID: number) => void
-  item: any
-  children: JSX.Element
+  onSelected: (item: any, itemIndex: number) => void
+  itemIndex: number
+  itemData: any
+  ItemComponent: ComponentType<ItemComponentProps>
+  actualSelectedItemIndex: number
 }
 
 export default function Item(props: ItemProps) {
-  const { onSelected, item, children } = props
+  const {
+    onSelected,
+    itemData,
+    itemIndex,
+    ItemComponent,
+    actualSelectedItemIndex
+  } = props
 
   return (
     <div
       onClick={() => {
-        onSelected(item)
+        onSelected(itemData, itemIndex)
       }}
       style={{
         display: 'flex',
@@ -20,7 +29,10 @@ export default function Item(props: ItemProps) {
         alignItems: 'center'
       }}
     >
-      {children}
+      <ItemComponent
+        itemData={itemData}
+        isSelected={actualSelectedItemIndex === itemIndex}
+      />
     </div>
   )
 }
