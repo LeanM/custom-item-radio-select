@@ -85,7 +85,7 @@ function App() {
         onSelectedItem={(item: Product) => {}} // Define what executes when an item is selected
         ItemComponent={Card} // Specify the Component that will render for each data item
         //  In this case, the Card component created below
-      ></ItemRadioSelect>
+      />
     </div>
   )
 }
@@ -112,8 +112,8 @@ export default function Card(props: CardProps) {
   const [background, setBackground] = useState('grey')
 
   useEffect(() => {
-    // Behaviour that checks if this item is the one selected or not
-    // and do something
+    // Behaviour that checks if this item is the one selected or not and do something
+    // (in this particular case the check is by the id's)
     if (actualSelectedItem.id === itemData.id) {
       setBackground('red')
     } else setBackground('grey')
