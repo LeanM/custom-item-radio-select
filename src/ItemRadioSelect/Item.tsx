@@ -6,17 +6,11 @@ export interface ItemProps {
   itemIndex: number
   itemData: any
   ItemComponent: ComponentType<ItemComponentProps>
-  actualSelectedItemIndex: number
+  isSelected: boolean
 }
 
 export default function Item(props: ItemProps) {
-  const {
-    onSelected,
-    itemData,
-    itemIndex,
-    ItemComponent,
-    actualSelectedItemIndex
-  } = props
+  const { onSelected, itemData, itemIndex, ItemComponent, isSelected } = props
 
   return (
     <div
@@ -29,10 +23,7 @@ export default function Item(props: ItemProps) {
         alignItems: 'center'
       }}
     >
-      <ItemComponent
-        itemData={itemData}
-        isSelected={actualSelectedItemIndex === itemIndex}
-      />
+      <ItemComponent itemData={itemData} isSelected={isSelected} />
     </div>
   )
 }

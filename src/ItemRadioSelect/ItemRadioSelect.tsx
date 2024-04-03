@@ -23,6 +23,8 @@ export interface ItemRadioSelectStyles {
 export type StyleType = 'horizontal' | 'vertical'
 
 const styles = {
+  width: '100%',
+  height: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -56,7 +58,7 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
             onSelected={(selectedItem: any, selectedIndex: number) => {
               handleSelected(selectedItem, selectedIndex)
             }}
-            actualSelectedItemIndex={selectedItemIndex}
+            isSelected={selectedItemIndex === index}
             ItemComponent={ItemComponent}
           />
         )

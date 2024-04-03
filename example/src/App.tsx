@@ -32,13 +32,13 @@ function App() {
     >
       <ItemRadioSelect
         style={itemRadioSelectStyles}
-        type='vertical'
+        type='horizontal'
         itemsData={data}
         onSelectedItem={(item: Product) => {
           console.log(item)
         }}
         ItemComponent={Card}
-      ></ItemRadioSelect>
+      />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 {
   "name": "custom-item-radio-select",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Generic radio selection of items defined by user. Users define the components items that can be selected in a radio button fashion. The radio select can display the items horizontal or vertical",
   "license": "MIT",
   "repository": "LeanM/custom-item-radio-select",
