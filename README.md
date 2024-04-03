@@ -22,21 +22,21 @@ To obtain a customizable radio selection of any type, this component requires th
 
 So this component requires an array of data (the items of any type) and the component that will be rendered as a radio button for every of those items.
 
-Let's consider the example where we fetch information about items that have an ID and a name. In this case, we have an array with the following items:
+Let's consider the example where we fetch information about Products that have an ID, a name and a value. In this case, we have an array with the following items:
 
 ```tsx
 data = [
-  { id: 1, name: 'Item1' },
-  { id: 2, name: 'Item2' },
-  { id: 3, name: 'Item3' }
+  { id: 1, name: 'Xbox', value: 500 },
+  { id: 2, name: 'PC', value: 1000 },
+  { id: 3, name: 'PS5', value: 400 }
 ]
 ```
 
 ### Using ItemRadioSelect component
 
-For this example, we want to represent these data items as simple cards, so we create a basic component called "Card", which will display the information of each item in a simple way.
+For this example, we want to represent these produccts as simple cards, so we create a basic component called "Card", which will display the information of each item in a simple customized way.
 
-The retrieved array of items and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
+The retrieved array of Products and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
 
 It can also be observed how styles can be specified within it, as well as the functionality that is executed when one of the items is selected.
 
@@ -45,17 +45,18 @@ import ItemRadioSelect from 'item-radio-select'
 import React, { useState } from 'react'
 import Card from './Card'
 
-export interface CardData {
+export interface Product {
   id: number
   name: string
+  value: number
 }
 
 function App() {
   // Fetched data
-  const [data, setData] = useState<CardData[]>([
-    { id: 1, name: 'Item1' },
-    { id: 2, name: 'Item2' },
-    { id: 3, name: 'Item3' }
+  const [data, setData] = useState<Product[]>([
+    { id: 1, name: 'Xbox', value: 500 },
+    { id: 2, name: 'PC', value: 1000 },
+    { id: 3, name: 'PS5', value: 400 }
   ])
 
   // Styles for ItemRadioSelect component:
@@ -81,7 +82,7 @@ function App() {
         style={itemRadioSelectStyles}
         type='horizontal' // type can be "horizontal" (flexDirection row) or "vertical" (flexDirection column)
         itemsData={data} // Specify the data to render the items
-        onSelectedItem={(item: CardData) => {}} // Define what executes when an item is selected
+        onSelectedItem={(item: Product) => {}} // Define what executes when an item is selected
         ItemComponent={Card} // Specify the Component that will render for each data item
         //  In this case, the Card component created below
       ></ItemRadioSelect>
@@ -90,36 +91,47 @@ function App() {
 }
 ```
 
-Every card will receive the data of the item to render and the information of
-the actual item selected in the ItemRadioSelect component, so the Card can
-make whatever you want when is or is not selected.
+Every card will receive the data of the item (in this example, a product) to render
+and updates of the actual item selected in the ItemRadioSelect component.
 
 ```tsx
 import React from 'react'
 import { CardData } from './App'
 
+// Props need to respect the 'itemData' and 'actualSelectedItem' key names.
 export interface CardProps {
-  itemData: CardData
-  actualSelectedItem: any
+  itemData: Product
+  actualSelectedItem: Product
 }
 
 export default function Card(props: CardProps) {
-  // The component will receive in props the information of what item is selected
-  // on the radio select component
+  // The component will receive in props the information of what item
+  // is selected on the radio select component
   const { itemData, actualSelectedItem } = props
+
+  const [background, setBackground] = useState('grey')
+
+  useEffect(() => {
+    // Behaviour that checks if this item is the one selected or not
+    // and do something
+    if (actualSelectedItem.id === itemData.id) {
+      setBackground('red')
+    } else setBackground('grey')
+  }, [actualSelectedItem])
 
   return (
     <div
       style={{
-        width: '4rem',
+        width: '8rem',
         textAlign: 'center',
-        backgroundColor: actualSelectedItem.id === itemData.id ? 'red' : 'grey',
-        // Behaviour when the item is the one selected or not
-        height: '4rem',
-        borderRadius: '20px'
+        backgroundColor: background,
+        height: '8rem',
+        borderRadius: '20px',
+        fontWeight: '700'
       }}
     >
-      {itemData.name}
+      <p>{itemData.name}</p>
+      <p style={{ color: 'green' }}>${itemData.value}</p>
     </div>
   )
 }

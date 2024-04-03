@@ -1,22 +1,23 @@
 import ItemRadioSelect from 'custom-item-radio-select'
 import React, { useState } from 'react'
-import ActualItem from './ActualItem'
+import Card from './Card'
 
-export interface ItemData {
+export interface Product {
   id: number
   name: string
+  value: number
 }
 
 function App() {
-  const [data, setData] = useState<ItemData[]>([
-    { id: 1, name: 'Item1' },
-    { id: 2, name: 'Item2' },
-    { id: 3, name: 'Item3' }
+  const [data, setData] = useState<Product[]>([
+    { id: 1, name: 'Xbox', value: 500 },
+    { id: 2, name: 'PC', value: 1000 },
+    { id: 3, name: 'PS5', value: 400 }
   ])
 
   const itemRadioSelectStyles = {
     width: '100%',
-    height: '20rem',
+    height: '50%',
     gap: '1rem'
   }
 
@@ -33,8 +34,8 @@ function App() {
         style={itemRadioSelectStyles}
         type='horizontal'
         itemsData={data}
-        onSelectedItem={(item: ItemData) => {}}
-        ItemComponent={ActualItem}
+        onSelectedItem={(item: Product) => {}}
+        ItemComponent={Card}
       ></ItemRadioSelect>
     </div>
   )
