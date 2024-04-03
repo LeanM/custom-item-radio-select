@@ -12,7 +12,7 @@ npm install --save custom-item-radio-select
 
 ## Demo
 
-![](https://github.com/LeanM/custom-item-radio-select/blob/main/item-radio-select.gif?raw=true)
+![](https://github.com/LeanM/custom-item-radio-select/blob/main/custom-item-radio-select.gif?raw=true)
 
 ## Usage
 
