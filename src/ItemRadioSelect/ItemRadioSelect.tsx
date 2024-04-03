@@ -4,7 +4,7 @@ import Item from './Item'
 export interface ItemRadioSelectProps {
   ItemComponent: ComponentType<any>
   itemsData: any[]
-  onSelectedItem: (itemID: number) => void
+  onSelectedItem: (itemID: any) => void
   style?: ItemRadioSelectStyles
   type?: StyleType
 }
@@ -26,7 +26,7 @@ const styles = {
 
 export default function ItemRadioSelect(props: ItemRadioSelectProps) {
   const { itemsData, ItemComponent, onSelectedItem, style, type } = props
-  const [selectedItemID, setSelectedItemID] = useState<number>(-1)
+  const [selectedItem, setSelectedItem] = useState<any>({})
   const [componentStyles, setComponentStyles] = useState<any>({})
 
   useEffect(() => {
@@ -36,11 +36,11 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
   }, [style])
 
   useEffect(() => {
-    onSelectedItem(selectedItemID)
-  }, [selectedItemID])
+    onSelectedItem(selectedItem)
+  }, [selectedItem])
 
-  const handleSelected = (selectedID: number) => {
-    setSelectedItemID(selectedID)
+  const handleSelected = (selectedItem: any) => {
+    setSelectedItem(selectedItem)
   }
 
   return (
@@ -49,15 +49,12 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
         return (
           <Item
             key={index}
-            itemID={item.id}
-            onSelected={(selectedID: number) => {
-              handleSelected(selectedID)
+            item={item}
+            onSelected={(selectedItem: any) => {
+              handleSelected(selectedItem)
             }}
           >
-            <ItemComponent
-              itemData={item}
-              actualSelectedItemID={selectedItemID}
-            />
+            <ItemComponent itemData={item} actualSelectedItem={selectedItem} />
           </Item>
         )
       })}
