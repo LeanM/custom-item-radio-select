@@ -4,17 +4,25 @@
 
 [![NPM](https://img.shields.io/npm/v/item-radio-select.svg)](https://www.npmjs.com/package/item-radio-select) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+
+
 ## Install
+
 
 ```bash
 npm install --save custom-item-radio-select
 ```
 
+
 ## Demo
+
 
 ![](https://github.com/LeanM/custom-item-radio-select/blob/main/custom-item-radio-select.gif?raw=true)
 
+
+
 ## Concept
+
 
 This package brings a radio button behaviour for any type of data
 and component representation which is specified by the developer.
@@ -22,7 +30,10 @@ and component representation which is specified by the developer.
 This component requires information that will be represented and how this information will be displayed as a radio button.
 Therefore, the ItemRadioSelect component must be provided with an array of data (the items of any type) and the component that will be rendered as a radio button for each of those items.
 
+
+
 ## Props
+
 
 ### ItemRadioSelect props
 
@@ -30,8 +41,9 @@ Therefore, the ItemRadioSelect component must be provided with an array of data 
 | --------------- | -------------------------- | ----------------------------------------------------------- | ----------- | ---------- |
 | itemsData       | array                      | array of data for the items to be rendered                  | required    |            |
 | radioItemRender | func(itemData, isSelected) | function to render your custom radio item based on the data | required    |            |
-| type            | string                     | specify an horizontal or vertical display of the items      | no-required | horizontal |
+| type            | string                     | specify an horizontal or vertical display of the items (values can be "horizontal" or "vertical")      | no-required | horizontal |
 | onSelectedItem  | func(selectedItem)         | function to do something on radio item selected             | required    |            |
+
 
 ### Style props
 
@@ -41,7 +53,10 @@ Therefore, the ItemRadioSelect component must be provided with an array of data 
 | height | string | specify the height of ItemRadioSelect component container  |         |
 | gap    | string | specify the gap between items of ItemRadioSelect component |         |
 
+
+
 ## Usage Example
+
 
 Let's consider the example where we fetch information about products that have an ID, a name, and a value. In this case, we have an array with the following items:
 
@@ -61,7 +76,10 @@ data = [
 
 Then, in this example, we want to implement a radio selection of these Products representing them as simple cards that manages the information on his own simple way.
 
+
+
 ### Example Card Component
+
 
 For this we create a basic component called "Card" that receives in his props the data
 of the product that it will render and a boolean that specifies if this Card/Product is the one selected on the Radio selection (Information provided by the [ItemRadioSelect component](#itemradioselect-component)).
@@ -106,11 +124,15 @@ export default function Card(props: CardProps) {
 }
 ```
 
+
+
 ### ItemRadioSelect Component
+
 
 The retrieved array of products and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
 
 It can also be observed how styles can be specified within it, as well as the functionality that is executed when one of the items is selected.
+
 
 ```tsx
 import ItemRadioSelect from 'custom-item-radio-select'
@@ -170,11 +192,16 @@ function App() {
 }
 ```
 
+
+
 ## Finally
+
 
 Given the operation of the component in this example, it demonstrates its versatility for handling various datasets, such as products in this case, and pairing them with any suitable representation component, like the [Card component](#example-card-component) shown here. The main [ItemRadioSelect component](#itemradioselect-component) supplies the data of the item to be rendered (referred to here as productData) and information indicating whether that item is currently selected in the radio selection (referred to here as isProductSelected).
 
 This setup enables customization of how different pieces of information are presented, as well as defining specific actions to occur upon selecting or deselecting a particular item.
+
+
 
 ## License
 
