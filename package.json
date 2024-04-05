@@ -1,6 +1,6 @@
 {
   "name": "custom-item-radio-select",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "This package brings a radio button behaviour for any type of data and component representation which is specified by the developer.",
   "license": "MIT",
   "repository": "LeanM/custom-item-radio-select",
