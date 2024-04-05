@@ -64,7 +64,7 @@ Then, in this example, we want to implement a radio selection of these Products 
 ### Example Card Component
 
 For this we create a basic component called "Card" that receives in his props the data
-of the product that it will render and a boolean that specifies if this Card/Product is the one selected on the Radio selection (Information provided by the ItemRadioSelect component).
+of the product that it will render and a boolean that specifies if this Card/Product is the one selected on the Radio selection (Information provided by the [ItemRadioSelect component](#itemradioselect-component)).
 
 ```tsx
 import React from 'react'
@@ -172,7 +172,7 @@ function App() {
 
 ## Finally
 
-Given the operation of the component in this example, it demonstrates its versatility for handling various datasets, such as products in this case, and pairing them with any suitable representation component, like the Card component shown here. The main ItemRadioSelect component supplies the data of the item to be rendered (referred to here as productData) and information indicating whether that item is currently selected in the radio selection (referred to here as isProductSelected).
+Given the operation of the component in this example, it demonstrates its versatility for handling various datasets, such as products in this case, and pairing them with any suitable representation component, like the [Card component](#example-card-component) shown here. The main [ItemRadioSelect component](#itemradioselect-component) supplies the data of the item to be rendered (referred to here as productData) and information indicating whether that item is currently selected in the radio selection (referred to here as isProductSelected).
 
 This setup enables customization of how different pieces of information are presented, as well as defining specific actions to occur upon selecting or deselecting a particular item.
 
