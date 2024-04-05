@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { Product } from './App'
 
 export interface CardProps {
-  itemData: Product
-  isSelected: boolean
+  productData: Product
+  isProductSelected: boolean
 }
 
 export default function Card(props: CardProps) {
-  const { itemData, isSelected } = props
+  const { productData, isProductSelected } = props
 
   const [background, setBackground] = useState('grey')
 
   useEffect(() => {
-    if (isSelected) {
+    if (isProductSelected) {
       setBackground('red')
     } else setBackground('grey')
-  }, [isSelected])
+  }, [isProductSelected])
 
   return (
     <div
@@ -28,8 +28,8 @@ export default function Card(props: CardProps) {
         fontWeight: '700'
       }}
     >
-      <p>{itemData.name}</p>
-      <p style={{ color: 'green' }}>${itemData.value}</p>
+      <p>{productData.name}</p>
+      <p style={{ color: 'green' }}>${productData.value}</p>
     </div>
   )
 }

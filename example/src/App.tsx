@@ -34,10 +34,12 @@ function App() {
         style={itemRadioSelectStyles}
         type='horizontal'
         itemsData={data}
-        onSelectedItem={(item: Product) => {
-          console.log(item)
+        onSelectedItem={(selectedItem: Product) => {
+          console.log(selectedItem)
         }}
-        ItemComponent={Card}
+        radioItemRender={(radioItemData: Product, isSelected: boolean) => (
+          <Card productData={radioItemData} isProductSelected={isSelected} />
+        )}
       />
     </div>
   )

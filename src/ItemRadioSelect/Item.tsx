@@ -1,16 +1,15 @@
-import React, { ComponentType } from 'react'
-import { ItemComponentProps } from './ItemRadioSelect'
+import React from 'react'
 
 export interface ItemProps {
   onSelected: (item: any, itemIndex: number) => void
   itemIndex: number
   itemData: any
-  ItemComponent: ComponentType<ItemComponentProps>
+  radioItemRender: (radioItemData: any, isSelected: boolean) => React.ReactNode
   isSelected: boolean
 }
 
 export default function Item(props: ItemProps) {
-  const { onSelected, itemData, itemIndex, ItemComponent, isSelected } = props
+  const { onSelected, itemData, itemIndex, isSelected, radioItemRender } = props
 
   return (
     <div
@@ -20,10 +19,11 @@ export default function Item(props: ItemProps) {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        cursor: 'pointer'
       }}
     >
-      <ItemComponent itemData={itemData} isSelected={isSelected} />
+      {radioItemRender(itemData, isSelected)}
     </div>
   )
 }

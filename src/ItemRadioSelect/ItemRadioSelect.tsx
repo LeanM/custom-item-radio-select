@@ -1,15 +1,10 @@
-import React, { ComponentType, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Item from './Item'
 
-export interface ItemComponentProps {
-  itemData: any
-  isSelected: boolean
-}
-
 export interface ItemRadioSelectProps {
-  ItemComponent: ComponentType<ItemComponentProps>
+  radioItemRender: (radioItemData: any, isSelected: boolean) => React.ReactNode
   itemsData: any[]
-  onSelectedItem: (itemID: any) => void
+  onSelectedItem: (selectedItem: any) => void
   style?: ItemRadioSelectStyles
   type?: StyleType
 }
@@ -32,7 +27,7 @@ const styles = {
 }
 
 export default function ItemRadioSelect(props: ItemRadioSelectProps) {
-  const { itemsData, ItemComponent, onSelectedItem, style, type } = props
+  const { itemsData, radioItemRender, onSelectedItem, style, type } = props
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1)
   const [componentStyles, setComponentStyles] = useState<any>({})
 
@@ -42,9 +37,13 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
     } else setComponentStyles({ ...styles, ...style })
   }, [style])
 
+  const updateSelectedItem = useCallback((selectedIndex: number) => {
+    setSelectedItemIndex(selectedIndex)
+  }, [])
+
   const handleSelected = (selectedItem: any, selectedIndex: number) => {
     onSelectedItem(selectedItem)
-    setSelectedItemIndex(selectedIndex)
+    updateSelectedItem(selectedIndex)
   }
 
   return (
@@ -59,7 +58,9 @@ export default function ItemRadioSelect(props: ItemRadioSelectProps) {
               handleSelected(selectedItem, selectedIndex)
             }}
             isSelected={selectedItemIndex === index}
-            ItemComponent={ItemComponent}
+            radioItemRender={(radioItemData: any, isSelected: boolean) =>
+              radioItemRender(radioItemData, isSelected)
+            }
           />
         )
       })}
