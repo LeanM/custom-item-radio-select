@@ -2,7 +2,7 @@
 
 > Customizable radio selection of items defined by user
 
-[![NPM](https://img.shields.io/npm/v/item-radio-select.svg)](https://www.npmjs.com/package/custom-item-radio-select) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/custom-item-radio-select.svg)](https://www.npmjs.com/package/custom-item-radio-select) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
 
@@ -24,11 +24,11 @@ npm install --save custom-item-radio-select
 ## Concept
 
 
-This package brings a radio button behaviour for any type of data
-and component representation which is specified by the developer.
+This package brings a **radio button behaviour for any type of data
+and component representation** which is specified by the developer.
 
 This component requires information that will be represented and how this information will be displayed as a radio button.
-Therefore, the ItemRadioSelect component must be provided with an array of data (the items of any type) and the component that will be rendered as a radio button for each of those items.
+Therefore, the ItemRadioSelect component must be provided with an **array of data** (the items of any type) and the **component** that will be rendered as a radio button for each of those items.
 
 
 
@@ -74,14 +74,14 @@ data = [
 ]
 ```
 
-Then, in this example, we want to implement a radio selection of these Products representing them as simple cards that manages the information on his own simple way.
+Then, in this example, we want to implement a **radio selection of these Products representing them as simple cards** that manages the information on his own simple way.
 
 
 
 ### Example Card Component
 
 
-For this we create a basic component called "Card" that receives in his props the data
+For this we create a basic component called **Card** that receives in his props the data
 of the product that it will render and a boolean that specifies if this Card/Product is the one selected on the Radio selection (Information provided by the [ItemRadioSelect component](#itemradioselect-component)).
 
 ```tsx
@@ -129,7 +129,7 @@ export default function Card(props: CardProps) {
 ### ItemRadioSelect Component
 
 
-The retrieved array of products and the 'Card' component are sent as properties to the 'ItemRadioSelect' component.
+The **retrieved array** of products and the **Card** component are sent as **properties** to the **ItemRadioSelect component**.
 
 It can also be observed how styles can be specified within it, as well as the functionality that is executed when one of the items is selected.
 
@@ -197,9 +197,9 @@ function App() {
 ## Finally
 
 
-Given the operation of the component in this example, it demonstrates its versatility for handling various datasets, such as products in this case, and pairing them with any suitable representation component, like the [Card component](#example-card-component) shown here. The main [ItemRadioSelect component](#itemradioselect-component) supplies the data of the item to be rendered (referred to here as productData) and information indicating whether that item is currently selected in the radio selection (referred to here as isProductSelected).
+Given the operation of the component in this example, it demonstrates its versatility for handling various datasets, such as products in this case, and pairing them with any suitable representation component, like the [Card component](#example-card-component) shown here. The main [ItemRadioSelect component](#itemradioselect-component) supplies the data of the item to be rendered **(referred to here as productData)** and information indicating whether that item is currently selected in the radio selection **(referred to here as isProductSelected)**.
 
-This setup enables customization of how different pieces of information are presented, as well as defining specific actions to occur upon selecting or deselecting a particular item.
+This setup enables **customization** of how different pieces of information are presented, as well as defining specific actions to occur upon selecting or deselecting a particular item.
 
 
 
